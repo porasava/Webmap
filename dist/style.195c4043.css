@@ -79,4 +79,35 @@
     color: #fff;
   }
 
+  /* #undefined {
+    display: none;
+  } */
+  /* ถ้ามีการเพิ่มหรือลด layer ต้องมาแก้ตรงนี้ ตอนนี้ใช้ ดีืแะรนื if แทนแล้ว*/ 
+  /* .mb-3:nth-child(4) {
+    display: none;
+  } */
+
+   #map {
+    width: 99.99%;
+    height: calc(100% - 50px - 50px);
+  }
+ /*  header{
+    height:50px; 
+  }
+  footer{
+    height:50px;
+  } */
+
+  #map-canvas {
+    width: 100%;
+    height: calc(100% - 50px - 50px);
+  }
+  header{
+    height:50px; 
+  }
+  footer{
+    height:50px;
+  }
+
+
 /*# sourceMappingURL=/style.195c4043.css.map */

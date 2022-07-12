@@ -6,7 +6,7 @@ import TileLayer from 'ol/layer/Tile';
 import TileWMS from 'ol/source/TileWMS';
 import Projection from 'ol/proj/Projection';
 
-const serverUrl="http://localhost:5000/geoserver/wms";
+const serverUrl="http://172.19.16.1:5000/geoserver/wms";
 const mapProjection = new Projection({
     code:'EPSG:4326',
     units:'m',
@@ -25,22 +25,22 @@ const CrimeTASource = new ImageWMS({
 const CrimeTALayer = new ImageLayer({
     source:CrimeTASource,
     // @ts-ignore
-    name:'CrimeTA'
+    name:'City'
 });
 
 
-const CrimeAreaSource = new ImageWMS({
-    url:serverUrl,
-    // layer:layer name
-    params:{"LAYERS":"Crime by area Renamed","VERSION":"1.1.1","FORMAT":"image/png"}
+// const CrimeAreaSource = new ImageWMS({
+//     url:serverUrl,
+//     // layer:layer name
+//     params:{"LAYERS":"Crime by area Renamed","VERSION":"1.1.1","FORMAT":"image/png"}
 
-});
+// });
 
-const CrimeAreaLayer = new ImageLayer({
-    source: CrimeAreaSource,
-    // @ts-ignore
-    name:'CrimeArea'
-});
+// const CrimeAreaLayer = new ImageLayer({
+//     source: CrimeAreaSource,
+//     // @ts-ignore
+//     name:'Suburb'
+// });
 
 const GGmapSource = new ImageWMS({
     url:serverUrl,
@@ -52,7 +52,7 @@ const GGmapSource = new ImageWMS({
 const GGmapLayer = new ImageLayer({
     source: GGmapSource,
     // @ts-ignore
-    name:'Google map'
+    name:'Google'
 });
 
 const view=new View({
@@ -66,7 +66,7 @@ projection:mapProjection
 const map = new Map({
     
 target:"map",
-layers:[GGmapLayer,CrimeAreaLayer, CrimeTALayer],
+layers:[GGmapLayer,CrimeTALayer],
 view:view
 })
 

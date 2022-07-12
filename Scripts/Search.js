@@ -8,7 +8,7 @@ const map=$('#map').data('map');
 
 const searchBtn= $('#search');
 
-const wfsUrl='http://localhost:5000/geoserver/Training/wfs';
+const wfsUrl='http://172.19.16.1:5000/geoserver/Training/wfs';
 
 const vectorSource= new VectorSource();
 const style = new Style({
@@ -26,25 +26,28 @@ map.addLayer(vector);
 
 searchBtn.click(function(){
 const crimeTAInput =$('#TAInput').val().toString();
-const crimeAreaInput =$('#AreaNameInput').val().toString();
+// const crimeAreaInput =$('#AreaNameInput').val().toString();
+// console.log(crimeTAInput)
+// console.log(crimeAreaInput)
 if(crimeTAInput.length==0)
 {
 window.alert('Please enter City Name')
 }
-if(crimeAreaInput.length==0)
-{
-window.alert('Please enter Suburb Name')
-}
+// if(crimeAreaInput.length==0)
+// {
+// window.alert('Please enter Suburb Name')
+// }
 
 const featureRequest = new WFS().writeGetFeature({
     srsName: 'EPSG:4326',
-    featureNS:  "http://localhost:5000/geoserver/Training",
-    featurePrefix: 'CrimeTA',
-    featureTypes: ['CrimeTA'],
+    featureNS:  "http://172.19.16.1:5000/geoserver/wfs",
+    featurePrefix: 'TA_rename',
+    featureTypes: ['TA_rename'],
     outputFormat: 'application/json',
     filter: and (
-        equalTo('ta2022_v1_',crimeTAInput),
-        equalTo('ta2022_v_1',crimeTAInput),
+        equalTo('ta2022_v_1',crimeTAInput)//end user input
+        ,equalTo('ta2022_v_1',crimeTAInput)
+        // ,equalTo('ta2022_v_2',crimeAreaInput)
     )
 });
 
@@ -52,8 +55,10 @@ fetch(wfsUrl,{
     method:'POST',
     body: new XMLSerializer().serializeToString(featureRequest)
 }).then(function(response){
+    // console.log(response)
     return response.json();
 }).then(function(json){
+    // console.log(json)
     if(json.features.length>0)
     {
      const features = new GeoJSON().readFeatures(json);

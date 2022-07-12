@@ -26,9 +26,14 @@
             <li class="nav-item active">
               <a class="nav-link" href="#"><span class="badge badge-pill badge-info" id="layers">Layers</span> <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#"><span class="badge badge-pill badge-info">Meaasure</span></a>
+
+            <li class="nav-item active">
+              <a class="nav-link" href="#" id="coordinates"></a>
             </li>
+
+            <!-- <li class="nav-item">
+              <a class="nav-link" href="#"><span class="badge badge-pill badge-info">Meaasure</span></a>
+            </li> -->
 
           </ul>
           <form class="form-inline my-2 my-lg-0">
@@ -36,7 +41,7 @@
             <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
             <!-- <form class="example" action="action_page.php"> -->
                 <input type="form-control mr-sm-2" placeholder="City name" id="TAInput" aria-label="search">
-                <input type="form-control mr-sm-2" placeholder="Suburb Name" id="AreaNameInput" name="search">
+                <!-- <input type="form-control mr-sm-2" type="search" placeholder="Suburb Name" id="AreaNameInput" name="search"> -->
                 <!-- <button type="submit"><i class="fa fa-search"></i></button> -->
                 <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="search">Search</button>
               </form>
@@ -80,6 +85,7 @@
     <script src="/Identify.ad0b8e74.js"></script>
     <script src="/Layers.dc56feb0.js"></script>
     <script src="/Search.09f321a1.js"></script>
+    <script src="/Coordinates.5e8c21ea.js"></script>
     <!-- <script>  var map = L.map('map').setView([-43.5044341,172.5925905], 13);
     map.zoomControl.setPosition('topright')
     
@@ -96,8 +102,10 @@
 <!-- taji.addTo(marker);
 marker.addTo(map); -->
         <!-- popup Div -->
-
-
+        <div id="map-canvas"></div>
+        <footer class="navbar-default navbar-fixed-bottom">
+          <p>© 2022 Copyright: Crime Map New Zealand</p>
+        </footer>
     
 </body>
 </html>

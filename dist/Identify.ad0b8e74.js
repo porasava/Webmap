@@ -22450,10 +22450,10 @@ map.on('singleclick', function (evt) {
   //Create a function to get the layer by name
   //Get The Layer by its name
 
-  var CrimeTALayer = (0, _customFunctions.getLayerByName)('CrimeTA');
-  var CrimeTASource = CrimeTALayer.getSource();
-  var CrimeAreaLayer = (0, _customFunctions.getLayerByName)('CrimeArea');
-  var CrimeAreaSource = CrimeAreaLayer.getSource();
+  var CrimeTALayer = (0, _customFunctions.getLayerByName)('City');
+  var CrimeTASource = CrimeTALayer.getSource(); // const CrimeAreaLayer=getLayerByName('CrimeArea');
+  // const CrimeAreaSource=CrimeAreaLayer.getSource();
+
   var view = map.getView();
   var resolution = view.getResolution();
   var projection = view.getProjection(); //แสดง pop up เมื่อคลิ๊ก
@@ -22466,10 +22466,8 @@ map.on('singleclick', function (evt) {
   noFeatures.html('<p>No features info</p>');
   var CrimeTAUrl = CrimeTASource.getFeatureInfoUrl(coordinate, resolution, projection, {
     'INFO_FORMAT': 'application/json'
-  });
-  var CrimeAreaUrl = CrimeAreaSource.getFeatureInfoUrl(coordinate, resolution, projection, {
-    'INFO_FORMAT': 'application/json'
-  });
+  }); // const CrimeAreaUrl=CrimeAreaSource.getFeatureInfoUrl(coordinate,resolution,projection,
+  //     {'INFO_FORMAT':'application/json'});
 
   if (CrimeTAUrl) {
     $.ajax({
@@ -22484,31 +22482,34 @@ map.on('singleclick', function (evt) {
           var CrimeTAName2 = CrimeTA.properties.ta2022_v_1;
           var CrimeTAArea = CrimeTA.properties.land_area_; // const CrimeTAInfo =$('#Crime-Info');
 
-          CrimeTAInfo.html("<h5>Crime TA Info</h5>\n            <p>Crime TA Name: ".concat(CrimeTAName, "</p> \n            <p>Crime TA Name2: ").concat(CrimeTAName2, "</p>\n            <p>Crime TA Area (sqm): ").concat(CrimeTAArea.toFixed(2), "</p>"));
+          CrimeTAInfo.html("<h5>Territorial Authority Info</h5>\n           \n            <p>Name: ".concat(CrimeTAName2, "</p>\n            <p>Area (sqm): ").concat(CrimeTAArea.toFixed(2), "</p>"));
           noFeatures.html('');
         }
       }
-    });
-
-    if (CrimeAreaUrl) {
-      $.ajax({
-        url: CrimeAreaUrl,
-        method: 'GET',
-        success: function success(result) {
-          console.log(result);
-          var CrimeArea = result.features[0];
-
-          if (CrimeArea) {
-            var CrimeAreaName = CrimeArea.properties.areaunitna;
-            var CrimeAreaName2 = CrimeArea.properties.tlaname; // const CrimeAreaArea=CrimeArea.properties.land_area_;
-            // const CrimeAreaInfo =$('#Crime-Area-Info');
-
-            CrimeAreaInfo.html("<h5>Crime Area Info</h5>\n                <p>Crime Area Name: ".concat(CrimeAreaName, "</p> \n                <p>Crime Area Name2: ").concat(CrimeAreaName2, "</p>\n                "));
-            noFeatures.html('');
-          }
-        }
-      });
-    }
+    }); // if(CrimeAreaUrl)
+    // {
+    //     $.ajax
+    //     ({
+    //         url:CrimeAreaUrl,
+    //         method: 'GET',
+    //         success:function(result)
+    //         {
+    //             console.log(result);
+    //             const CrimeArea=result.features[0];
+    //             if(CrimeArea){
+    //             const CrimeAreaName=CrimeArea.properties.areaunitna;
+    //             const CrimeAreaName2=CrimeArea.properties.tlaname;
+    //             // const CrimeAreaArea=CrimeArea.properties.land_area_;
+    //             // const CrimeAreaInfo =$('#Crime-Area-Info');
+    //             CrimeAreaInfo.html(`<h5>Crime Area unit Info</h5>
+    //             <p>Crime Area Name: ${CrimeAreaName}</p> 
+    //             <p>Crime Area Name2: ${CrimeAreaName2}</p>
+    //             `);
+    //             noFeatures.html('');
+    //             }
+    //         }
+    //     })
+    // }
   }
 
   {} //   content.innerHTML = '<p>You clicked here:</p><code>' + hdms + '</code>';
@@ -22543,7 +22544,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51847" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56533" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

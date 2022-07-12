@@ -150,9 +150,11 @@ $('#layers').click(function () {
   layersDivContent.html('');
   layersDiv.css('display', 'block');
   layers.forEach(function (layer) {
-    var element = "<div class=\"mb-3 form-check\">\n   <input type=\"checkbox\" class=\"form-check-input\" id= ".concat(layer.get('name'), ">\n   <label class=\"form-check-label\" for=\"exampleCheck1\">").concat(layer.get('name'), "</label>\n </div>");
-    layersDivContent.append(element);
-    $("#".concat(layer.get('name'))).prop('checked', layer.getVisible());
+    if (layer.get('name')) {
+      var element = "<div class=\"mb-3 form-check\">\n   <input type=\"checkbox\" class=\"form-check-input\" id= ".concat(layer.get('name'), ">\n   <label class=\"form-check-label\" for=\"exampleCheck1\">").concat(layer.get('name'), "</label>\n </div>");
+      layersDivContent.append(element);
+      $("#".concat(layer.get('name'))).prop('checked', layer.getVisible());
+    }
   });
   $('.form-check-input').change(function () {
     var checkbox = this;
@@ -174,9 +176,9 @@ function dragElement(elmnt) {
       pos3 = 0,
       pos4 = 0;
 
-  if (document.getElementById(elmnt.id + "header")) {
+  if (document.getElementById(elmnt.id + "-header")) {
     // if present, the header is where you move the DIV from:
-    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+    document.getElementById(elmnt.id + "-header").onmousedown = dragMouseDown;
   } else {
     // otherwise, move the DIV from anywhere inside the DIV:
     elmnt.onmousedown = dragMouseDown;
@@ -240,7 +242,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51847" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56533" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

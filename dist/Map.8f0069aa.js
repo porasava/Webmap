@@ -94233,7 +94233,7 @@ var _Projection = _interopRequireDefault(require("ol/proj/Projection"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var serverUrl = "http://localhost:5000/geoserver/wms";
+var serverUrl = "http://172.19.16.1:5000/geoserver/wms";
 var mapProjection = new _Projection.default({
   code: 'EPSG:4326',
   units: 'm',
@@ -94252,22 +94252,18 @@ var CrimeTASource = new _ImageWMS.default({
 var CrimeTALayer = new _layer.Image({
   source: CrimeTASource,
   // @ts-ignore
-  name: 'CrimeTA'
-});
-var CrimeAreaSource = new _ImageWMS.default({
-  url: serverUrl,
-  // layer:layer name
-  params: {
-    "LAYERS": "Crime by area Renamed",
-    "VERSION": "1.1.1",
-    "FORMAT": "image/png"
-  }
-});
-var CrimeAreaLayer = new _layer.Image({
-  source: CrimeAreaSource,
-  // @ts-ignore
-  name: 'CrimeArea'
-});
+  name: 'City'
+}); // const CrimeAreaSource = new ImageWMS({
+//     url:serverUrl,
+//     // layer:layer name
+//     params:{"LAYERS":"Crime by area Renamed","VERSION":"1.1.1","FORMAT":"image/png"}
+// });
+// const CrimeAreaLayer = new ImageLayer({
+//     source: CrimeAreaSource,
+//     // @ts-ignore
+//     name:'Suburb'
+// });
+
 var GGmapSource = new _ImageWMS.default({
   url: serverUrl,
   // layer:layer name
@@ -94280,7 +94276,7 @@ var GGmapSource = new _ImageWMS.default({
 var GGmapLayer = new _layer.Image({
   source: GGmapSource,
   // @ts-ignore
-  name: 'Google map'
+  name: 'Google'
 });
 var view = new _ol2.View({
   extent: [-177.35791015625, -47.72404861450195, 178.83621215820312, -33.95849609375],
@@ -94292,7 +94288,7 @@ var view = new _ol2.View({
 });
 var map = new _ol2.Map({
   target: "map",
-  layers: [GGmapLayer, CrimeAreaLayer, CrimeTALayer],
+  layers: [GGmapLayer, CrimeTALayer],
   view: view
 }); // jquery
 
@@ -94325,7 +94321,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51847" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56533" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

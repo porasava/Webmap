@@ -55,10 +55,10 @@ map.on('singleclick', function (evt) {
 //Create a function to get the layer by name
 
 //Get The Layer by its name
-const CrimeTALayer=getLayerByName('CrimeTA');
+const CrimeTALayer=getLayerByName('City');
 const CrimeTASource=CrimeTALayer.getSource();
-const CrimeAreaLayer=getLayerByName('CrimeArea');
-const CrimeAreaSource=CrimeAreaLayer.getSource();
+// const CrimeAreaLayer=getLayerByName('CrimeArea');
+// const CrimeAreaSource=CrimeAreaLayer.getSource();
 const view=map.getView();
 const resolution=view.getResolution();
 const projection=view.getProjection();
@@ -76,8 +76,8 @@ noFeatures.html('<p>No features info</p>')
 const CrimeTAUrl=CrimeTASource.getFeatureInfoUrl(coordinate,resolution,projection,
 {'INFO_FORMAT':'application/json'});
 
-const CrimeAreaUrl=CrimeAreaSource.getFeatureInfoUrl(coordinate,resolution,projection,
-    {'INFO_FORMAT':'application/json'});
+// const CrimeAreaUrl=CrimeAreaSource.getFeatureInfoUrl(coordinate,resolution,projection,
+//     {'INFO_FORMAT':'application/json'});
 
 if(CrimeTAUrl)
 {
@@ -95,39 +95,39 @@ if(CrimeTAUrl)
             const CrimeTAArea=CrimeTA.properties.land_area_;
 
             // const CrimeTAInfo =$('#Crime-Info');
-            CrimeTAInfo.html(`<h5>Crime TA Info</h5>
-            <p>Crime TA Name: ${CrimeTAName}</p> 
-            <p>Crime TA Name2: ${CrimeTAName2}</p>
-            <p>Crime TA Area (sqm): ${CrimeTAArea.toFixed(2)}</p>`);
+            CrimeTAInfo.html(`<h5>Territorial Authority Info</h5>
+           
+            <p>Name: ${CrimeTAName2}</p>
+            <p>Area (sqm): ${CrimeTAArea.toFixed(2)}</p>`);
             noFeatures.html('');
         }
         }
     })
 
-    if(CrimeAreaUrl)
-    {
-        $.ajax
-        ({
-            url:CrimeAreaUrl,
-            method: 'GET',
-            success:function(result)
-            {
-                console.log(result);
-                const CrimeArea=result.features[0];
-                if(CrimeArea){
-                const CrimeAreaName=CrimeArea.properties.areaunitna;
-                const CrimeAreaName2=CrimeArea.properties.tlaname;
-                // const CrimeAreaArea=CrimeArea.properties.land_area_;
-                // const CrimeAreaInfo =$('#Crime-Area-Info');
-                CrimeAreaInfo.html(`<h5>Crime Area Info</h5>
-                <p>Crime Area Name: ${CrimeAreaName}</p> 
-                <p>Crime Area Name2: ${CrimeAreaName2}</p>
-                `);
-                noFeatures.html('');
-                }
-            }
-        })
-    }
+    // if(CrimeAreaUrl)
+    // {
+    //     $.ajax
+    //     ({
+    //         url:CrimeAreaUrl,
+    //         method: 'GET',
+    //         success:function(result)
+    //         {
+    //             console.log(result);
+    //             const CrimeArea=result.features[0];
+    //             if(CrimeArea){
+    //             const CrimeAreaName=CrimeArea.properties.areaunitna;
+    //             const CrimeAreaName2=CrimeArea.properties.tlaname;
+    //             // const CrimeAreaArea=CrimeArea.properties.land_area_;
+    //             // const CrimeAreaInfo =$('#Crime-Area-Info');
+    //             CrimeAreaInfo.html(`<h5>Crime Area unit Info</h5>
+    //             <p>Crime Area Name: ${CrimeAreaName}</p> 
+    //             <p>Crime Area Name2: ${CrimeAreaName2}</p>
+    //             `);
+    //             noFeatures.html('');
+    //             }
+    //         }
+    //     })
+    // }
     
 
 

@@ -110740,7 +110740,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var map = $('#map').data('map');
 var searchBtn = $('#search');
-var wfsUrl = 'http://localhost:5000/geoserver/Training/wfs';
+var wfsUrl = 'http://172.19.16.1:5000/geoserver/Training/wfs';
 var vectorSource = new _Vector.default();
 var style = new _style.Style({
   stroke: new _style.Stroke({
@@ -110754,31 +110754,36 @@ var vector = new _layer.Vector({
 });
 map.addLayer(vector);
 searchBtn.click(function () {
-  var crimeTAInput = $('#TAInput').val().toString();
-  var crimeAreaInput = $('#AreaNameInput').val().toString();
+  var crimeTAInput = $('#TAInput').val().toString(); // const crimeAreaInput =$('#AreaNameInput').val().toString();
+  // console.log(crimeTAInput)
+  // console.log(crimeAreaInput)
 
   if (crimeTAInput.length == 0) {
     window.alert('Please enter City Name');
-  }
+  } // if(crimeAreaInput.length==0)
+  // {
+  // window.alert('Please enter Suburb Name')
+  // }
 
-  if (crimeAreaInput.length == 0) {
-    window.alert('Please enter Suburb Name');
-  }
 
   var featureRequest = new _format.WFS().writeGetFeature({
     srsName: 'EPSG:4326',
-    featureNS: "http://localhost:5000/geoserver/Training",
-    featurePrefix: 'CrimeTA',
-    featureTypes: ['CrimeTA'],
+    featureNS: "http://172.19.16.1:5000/geoserver/wfs",
+    featurePrefix: 'TA_rename',
+    featureTypes: ['TA_rename'],
     outputFormat: 'application/json',
-    filter: (0, _filter.and)((0, _filter.equalTo)('ta2022_v1_', crimeTAInput), (0, _filter.equalTo)('ta2022_v_1', crimeTAInput))
+    filter: (0, _filter.and)((0, _filter.equalTo)('ta2022_v_1', crimeTAInput) //end user input
+    , (0, _filter.equalTo)('ta2022_v_1', crimeTAInput) // ,equalTo('ta2022_v_2',crimeAreaInput)
+    )
   });
   fetch(wfsUrl, {
     method: 'POST',
     body: new XMLSerializer().serializeToString(featureRequest)
   }).then(function (response) {
+    // console.log(response)
     return response.json();
   }).then(function (json) {
+    // console.log(json)
     if (json.features.length > 0) {
       var features = new _format.GeoJSON().readFeatures(json);
       vectorSource.clear(true);
@@ -110819,7 +110824,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51847" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56533" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
